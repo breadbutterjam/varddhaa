@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Varddhaa Studios — Rate Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@100;300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{
+      min-height:100%;
+      background:#0a0907;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      padding:3rem 1rem;
+      font-family:'Lato',sans-serif}
+
+    .card{
+      width:100%;max-width:560px;
+      background:#0d0b09;
+      border:1px solid rgba(196,160,110,0.1);
+      position:relative;
+      overflow:hidden;
+    }
+
+    /* Faint glow top */
+    .card::before{
+      content:'';
+      position:absolute;top:-60px;left:50%;transform:translateX(-50%);
+      width:300px;height:160px;border-radius:50%;
+      background:radial-gradient(ellipse, rgba(196,160,110,0.07) 0%, transparent 70%);
+      pointer-events:none;
+    }
+
+    /* Giant ghost V */
+    .wm{
+      position:absolute;
+      top:50%;left:50%;transform:translate(-50%,-50%);
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic;font-weight:300;
+      font-size:28rem;
+      color:rgba(196,160,110,0.025);
+      pointer-events:none;user-select:none;
+      line-height:1;
+      letter-spacing:-0.05em;
+    }
+
+    /* Header */
+    .header{
+      /* padding:2.2rem 3rem 2rem; */
+      padding: 1.2rem 1rem 1.6rem;
+      position:relative;z-index:1;
+      border-bottom:1px solid rgba(196,160,110,0.1);
+    }
+
+    .logo{
+      display:block;
+      width:clamp(160px,55%,230px);
+      margin-bottom:1.8rem;
+      opacity:0.85;
+      /* Logo is already cream on black — render naturally, just slightly muted */
+    }
+
+    .eyebrow{
+      font-weight:100;font-size:0.52rem;
+      text-transform:uppercase;letter-spacing:0.55em;
+      color:rgba(196,160,110,0.45);
+      margin-bottom:0.8rem;
+    }
+
+    .title{
+      font-family:'Cormorant Garamond',serif;
+      font-weight:300;font-style:italic;
+      font-size:2.8rem;
+      color:rgba(235,225,210,0.88);
+      letter-spacing:0.02em;
+      line-height:1;
+    }
+
+    .subtitle{
+      margin-top:0.5rem;
+      font-size:0.62rem;font-weight:100;
+      text-transform:uppercase;letter-spacing:0.45em;
+      color:rgba(196,160,110,0.38);
+    }
+
+    /* Table */
+    .table{position:relative;z-index:1}
+
+    .row{
+      display:grid;grid-template-columns:1fr auto;
+      border-top:1px solid rgba(196,160,110,0.08);
+      transition:background .2s;
+    }
+    .row:hover{background:rgba(196,160,110,0.03)}
+    .row:last-child{border-bottom:1px solid rgba(196,160,110,0.08)}
+
+    .row-left{
+      padding:1.15rem 3rem;
+      display:flex;flex-direction:column;justify-content:center;gap:0.2rem;
+    }
+
+    .row-name{
+      font-weight:300;font-size:1rem;
+      color:rgba(235,225,210,0.75);
+      letter-spacing:0.02em;
+    }
+
+    .row-sub{
+      font-size:0.7rem;font-weight:100;
+      color:rgba(196,160,110,0.4);
+      letter-spacing:0.06em;
+      text-transform:uppercase;
+    }
+
+    .row-price{
+      min-width:120px;
+      display:flex;align-items:center;justify-content:flex-end;
+      padding:1.15rem 3rem 1.15rem 1.5rem;
+      font-family:'Cormorant Garamond',serif;
+      font-weight:300;font-style:italic;
+      font-size:1.75rem;
+      color:rgba(196,160,110,0.8);
+      letter-spacing:0.01em;
+      white-space:nowrap;
+    }
+
+    /* Section divider */
+    .section-label{
+      display:flex;align-items:center;gap:1rem;
+      padding:0.7rem 3rem;
+      background:#0a0907;
+      border-top:1px solid rgba(196,160,110,0.08);
+    }
+    .section-label span{
+      font-size:0.5rem;font-weight:100;
+      text-transform:uppercase;letter-spacing:0.5em;
+      color:rgba(196,160,110,0.35);
+      white-space:nowrap;
+    }
+    .section-label::after{
+      content:'';flex:1;height:1px;
+      background:linear-gradient(to right, rgba(196,160,110,0.15), transparent);
+    }
+
+    /* Footer */
+    .footer{
+      padding:1.6rem 3rem;
+      border-top:1px solid rgba(196,160,110,0.1);
+      position:relative;z-index:1;
+    }
+
+    .footer p{
+      font-size:0.65rem;font-weight:100;
+      color:rgba(196,160,110,0.3);
+      line-height:1.9;
+      letter-spacing:0.02em;
+    }
+    .footer strong{color:rgba(196,160,110,0.55);font-weight:300}
+
+    /* Corner marks */
+    .c{position:absolute;width:14px;height:14px;opacity:0.2}
+    .c--tl{top:12px;left:12px;border-top:1px solid #c4a06e;border-left:1px solid #c4a06e}
+    .c--tr{top:12px;right:12px;border-top:1px solid #c4a06e;border-right:1px solid #c4a06e}
+    .c--bl{bottom:12px;left:12px;border-bottom:1px solid #c4a06e;border-left:1px solid #c4a06e}
+    .c--br{bottom:12px;right:12px;border-bottom:1px solid #c4a06e;border-right:1px solid #c4a06e}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="c c--tl"></div><div class="c c--tr"></div>
+    <div class="c c--bl"></div><div class="c c--br"></div>
+    <div class="wm">V</div>
+
+    <div class="header">
+      <img src="final-logo-05-cropped2.png" alt="Varddhaa Studios" class="logo"/>
+      <p class="eyebrow">Varddhaa Studios</p>
+      <h1 class="title">Rental Card</h1>
+      <p class="subtitle">Applicable from July 2026</p>
+    </div>
+
+    <div class="table">
+      <div class="row">
+        <div class="row-left">
+          <span class="row-name">The Nook</span>
+          <span class="row-sub">Small studio (1)</span>
+        </div>
+        <div class="row-price">1500/-</div>
+      </div>
+      <div class="row">
+        <div class="row-left">
+          <span class="row-name">The Nook</span>
+          <span class="row-sub">Small studio (2)</span>
+        </div>
+        <div class="row-price">1800/-</div>
+      </div>
+      <div class="row">
+        <div class="row-left">
+          <span class="row-name">The Arena</span>
+          <span class="row-sub">Big studio</span>
+        </div>
+        <div class="row-price">2800/-</div>
+      </div>
+
+      <div class="section-label"><span>3 Hour Packages</span></div>
+
+      <div class="row">
+        <div class="row-left">
+          <span class="row-name">The Nook (1)</span>
+          <span class="row-sub">3 hours package</span>
+        </div>
+        <div class="row-price">3800/-</div>
+      </div>
+      <div class="row">
+        <div class="row-left">
+          <span class="row-name">The Nook (2)</span>
+          <span class="row-sub">3 hours package</span>
+        </div>
+        <div class="row-price">4200/-</div>
+      </div>
+      <div class="row">
+        <div class="row-left">
+          <span class="row-name">The Arena</span>
+          <span class="row-sub">3 hours package</span>
+        </div>
+        <div class="row-price">7200/-</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p><strong>All the above rates are inclusive of GST</strong> &nbsp;|&nbsp; 27AKFPR4911G1Z4</p>
+      <p>Varddhaa Studios reserves the right to revise fees and charges as per company policy.</p>
+      <p>Contact: 9819145475 &nbsp;|&nbsp; G 0001, second floor, Raghuleela mall, Kandivali west, Mumbai 67</p>
+    </div>
+  </div>
+</body>
+</html>

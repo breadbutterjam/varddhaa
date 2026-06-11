@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Varddhaa Studios — Rate Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html,body{
+      min-height:100%;
+      background:#e8ddd0;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      /* padding:3rem 1rem; */
+      font-family:'Lato',sans-serif
+    }
+
+    /* Card */
+    .card{
+      width:100%;max-width:560px;
+      background:#f0e8dc;
+      border-radius:4px;
+      overflow:hidden;
+      position:relative;
+      box-shadow:0 8px 48px rgba(80,30,10,0.14);
+    }
+
+    /* Decorative shapes */
+    .deco-circle-tl{
+      position:absolute;top:-52px;left:-52px;
+      width:140px;height:140px;border-radius:50%;
+      background:#c8a882;opacity:0.7;
+    }
+    .deco-circle-bl{
+      position:absolute;bottom:-60px;left:-40px;
+      width:160px;height:160px;border-radius:50%;
+      background:#c8a882;opacity:0.45;
+    }
+    .deco-curl{
+      position:absolute;top:10px;right:16px;
+      width:90px;height:80px;
+      border:1.5px solid #7d3f2e;
+      border-radius:50% 10% 50% 10%;
+      opacity:0.25;
+      transform:rotate(20deg);
+    }
+
+    /* Header */
+    .header{
+      padding:1rem 1rem 1.6rem;
+      position:relative;z-index:1;
+    }
+
+    .logo{
+      display:block;
+      width:clamp(160px,55%,240px);
+      margin-bottom:1.6rem;
+      /* The logo is cream-on-black; invert+sepia shifts it to warm brown on transparent */
+      filter:invert(1) sepia(1) saturate(0.6) hue-rotate(340deg) brightness(0.55);
+    }
+
+    .title{
+      font-family:'Lato',sans-serif;
+      font-weight:700;
+      font-size:1.72rem;
+      letter-spacing:0.08em;
+      color:#6b3a2a;
+      text-transform:uppercase;
+      line-height:1;
+    }
+
+    .subtitle{
+      margin-top:0.5rem;
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic;
+      font-weight:400;
+      font-size:1rem;
+      color:#a0705a;
+      letter-spacing:0.04em;
+    }
+
+    /* Table */
+    .table{
+      margin:0 0 0 0;
+      position:relative;z-index:1;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr auto;
+      border-top:1px solid rgba(107,58,42,0.15);
+    }
+
+    .row:last-child{border-bottom:1px solid rgba(107,58,42,0.15)}
+
+    .row-left{
+      padding:1.1rem 1rem;
+      display:flex;flex-direction:column;justify-content:center;gap:0.18rem;
+    }
+
+    .row-name{
+      font-weight:400;
+      font-size:1.05rem;
+      color:#6b3a2a;
+      letter-spacing:0.01em;
+    }
+
+    .row-sub{
+      font-size:0.78rem;
+      color:#a0705a;
+      font-weight:300;
+      letter-spacing:0.02em;
+    }
+
+    .row-price{
+      min-width:130px;
+      display:flex;align-items:center;justify-content:center;
+      background:#7d3f2e;
+      padding:1.1rem 1.6rem;
+      font-family:'Cormorant Garamond',serif;
+      font-weight:600;
+      font-size:1.9rem;
+      color:#f0e8dc;
+      letter-spacing:0.02em;
+      white-space:nowrap;
+    }
+
+    /* Arch top on first price cell */
+    .row:first-child .row-price{
+      border-radius:0 0 0 0;
+    }
+
+    /* Section divider — packages */
+    .section-label{
+      padding:0.5rem 2.8rem;
+      font-size:0.54rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:0.45em;
+      color:#a0705a;
+      background:#e8ddd0;
+      border-top:1px solid rgba(107,58,42,0.12);
+    }
+
+    /* Footer */
+    .footer{
+      background:#6b3a2a;
+      padding:1.4rem 2.8rem;
+      position:relative;z-index:1;
+    }
+
+    .footer p{
+      font-size:0.68rem;
+      color:rgba(240,232,220,0.75);
+      line-height:1.7;
+      font-weight:300;
+      letter-spacing:0.01em;
+    }
+
+    .footer strong{color:rgba(240,232,220,0.95)}
+
+    /* Watermark */
+    .wm{
+      position:absolute;
+      bottom:60px;right:-20px;
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic;
+      font-size:9rem;
+      color:rgba(107,58,42,0.06);
+      pointer-events:none;
+      user-select:none;
+      z-index:0;
+      line-height:1;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="deco-circle-tl"></div>
+    <div class="deco-circle-bl"></div>
+    <div class="deco-curl"></div>
+    <div class="wm">V</div>
+
+    <div class="header">
+      <img src="final-logo-05-cropped2.png" alt="Varddhaa Studios" class="logo"/>
+      <h1 class="title">Rental Card</h1>
+      <p class="subtitle">Applicable from 01 July 2026</p>
+    </div>
+
+    <div class="table">
+      <div class="row">
+        <div class="row-left">
+          <span class="row-name">The Nook</span>
+          <span class="row-sub">Small studio (1)</span>
+        </div>
+        <div class="row-price">1500/-</div>
+      </div>
+      <div class="row">
+        <div class="row-left">
+          <span class="row-name">The Nook</span>
+          <span class="row-sub">Small studio (2)</span>
+        </div>
+        <div class="row-price">1800/-</div>
+      </div>
+      <div class="row">
+        <div class="row-left">
+          <span class="row-name">The Arena</span>
+          <span class="row-sub">Big studio</span>
+        </div>
+        <div class="row-price">2800/-</div>
+      </div>
+
+      <div class="section-label">3 Hour Packages</div>
+
+      <div class="row">
+        <div class="row-left">
+          <span class="row-name">The Nook (1)</span>
+          <span class="row-sub">3 hours package</span>
+        </div>
+        <div class="row-price">3800/-</div>
+      </div>
+      <div class="row">
+        <div class="row-left">
+          <span class="row-name">The Nook (2)</span>
+          <span class="row-sub">3 hours package</span>
+        </div>
+        <div class="row-price">4200/-</div>
+      </div>
+      <div class="row">
+        <div class="row-left">
+          <span class="row-name">The Arena</span>
+          <span class="row-sub">3 hours package</span>
+        </div>
+        <div class="row-price">7200/-</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p><strong>All the above rates are inclusive of GST</strong> &nbsp;|&nbsp; 27AKFPR4911G1Z4</p>
+      <p>Varddhaa Studios reserves the right to revise fees and charges as per company policy.</p>
+      <p>Contact: 9819145475 &nbsp;|&nbsp; G 0001, second floor, Raghuleela mall, Kandivali west, Mumbai 67</p>
+    </div>
+  </div>
+</body>
+</html>
