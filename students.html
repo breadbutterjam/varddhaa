@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vardha Studios — Students</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0c0e;
+    --surface: #141418;
+    --surface2: #1c1c22;
+    --border: #2a2a32;
+    --grad-start: #4fd1c5;
+    --grad-end: #a8e063;
+    --grad: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+    --text: #f0ede8;
+    --text-dim: #8a8a96;
+    --text-dimmer: #4a4a56;
+    --danger: #ff5f5f;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 15px; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+  header { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px 14px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .logo-mark { display: flex; flex-direction: column; line-height: 1; }
+  .logo-mark .script { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300; font-size: 22px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: -0.5px; }
+  .logo-mark .sub { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--text-dim); margin-top: 1px; }
+  .btn-icon { background: var(--surface2); color: var(--text-dim); border: none; width: 34px; height: 34px; padding: 0; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+  .btn-icon:hover { color: var(--text); background: var(--border); }
+
+  nav { display: flex; gap: 2px; padding: 10px 20px; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--border); }
+  nav::-webkit-scrollbar { display: none; }
+  .nav-item { flex-shrink: 0; padding: 7px 14px; border-radius: 20px; font-size: 13px; color: var(--text-dim); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .nav-item:hover { color: var(--text); background: var(--surface2); }
+  .nav-item.active { background: var(--surface2); color: var(--text); font-weight: 500; }
+  .nav-item.active span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  main { padding: 20px; max-width: 600px; margin: 0 auto; }
+  .page-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 16px; }
+  .page-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 28px; line-height: 1; letter-spacing: -0.5px; }
+  .count-badge { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; border: none; transition: all 0.2s; }
+  .btn-primary { background: var(--grad); color: #0c0c0e; }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-primary:disabled { opacity: 0.6; transform: none; cursor: not-allowed; }
+  .btn-ghost { background: transparent; color: var(--text-dim); border: 1px solid var(--border); }
+  .btn-ghost:hover { color: var(--text); border-color: var(--text-dimmer); }
+  .btn-sm { padding: 6px 12px; font-size: 12px; }
+  .btn-danger-soft { background: transparent; color: var(--danger); border: 1px solid transparent; padding: 6px 10px; font-size: 12px; font-family: 'DM Sans', sans-serif; font-weight: 500; cursor: pointer; border-radius: 8px; transition: all 0.2s; display: inline-flex; align-items: center; gap: 4px; }
+  .btn-danger-soft:hover { border-color: var(--danger); background: rgba(255,95,95,0.06); }
+
+  /* Filter row */
+  .filter-row { display: flex; gap: 8px; margin-bottom: 12px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+  .filter-row::-webkit-scrollbar { display: none; }
+  .filter-chip { flex-shrink: 0; padding: 5px 12px; border-radius: 20px; font-size: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--text-dim); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .filter-chip:hover { color: var(--text); }
+  .filter-chip.active { border-color: var(--grad-start); color: var(--grad-start); background: rgba(79,209,197,0.07); }
+
+  .search-wrap { position: relative; margin-bottom: 16px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-dimmer); }
+  .search-input { width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 10px 12px 10px 38px; outline: none; transition: border-color 0.2s; }
+  .search-input::placeholder { color: var(--text-dimmer); }
+  .search-input:focus { border-color: var(--grad-start); }
+
+  /* Student cards */
+  .student-list { display: flex; flex-direction: column; gap: 10px; }
+  .student-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; transition: border-color 0.2s; animation: fadeUp 0.3s ease both; }
+  .student-card:hover { border-color: var(--text-dimmer); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .card-top { display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 500; flex-shrink: 0; background: linear-gradient(135deg, #1e1c2a, #1a1c2a); color: #a78bfa; overflow: hidden; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .card-info { flex: 1; min-width: 0; }
+  .card-name { font-weight: 500; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .card-sub { font-size: 12px; color: var(--text-dim); margin-top: 2px; display: flex; align-items: center; gap: 6px; }
+  .age-badge { font-size: 11px; padding: 1px 7px; border-radius: 20px; background: var(--surface2); border: 1px solid var(--border); color: var(--text-dim); }
+
+  .status-pill { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 500; flex-shrink: 0; }
+  .status-pill.active { background: rgba(79,209,197,0.1); color: var(--grad-start); border: 1px solid rgba(79,209,197,0.2); }
+  .status-pill.inactive { background: rgba(255,95,95,0.08); color: var(--text-dim); border: 1px solid var(--border); }
+
+  .card-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .meta-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--text-dim); min-width: 0; }
+  .meta-item svg { flex-shrink: 0; color: var(--text-dimmer); }
+  .meta-item span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 160px; }
+
+  .guardian-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 8px 10px; background: var(--surface2); border-radius: var(--radius-sm); }
+  .guardian-icon { color: var(--text-dimmer); flex-shrink: 0; }
+  .guardian-info { flex: 1; min-width: 0; }
+  .guardian-name { font-size: 12px; font-weight: 500; }
+  .guardian-phone { font-size: 11px; color: var(--text-dim); }
+
+  .card-actions { display: flex; gap: 6px; margin-top: 12px; justify-content: flex-end; align-items: center; }
+
+  .empty-state { text-align: center; padding: 48px 24px; color: var(--text-dim); }
+  .empty-icon { font-size: 36px; margin-bottom: 12px; opacity: 0.4; }
+  .empty-state h3 { font-weight: 400; font-size: 16px; margin-bottom: 6px; }
+  .empty-state p { font-size: 13px; color: var(--text-dimmer); }
+  .loading { display: flex; align-items: center; justify-content: center; padding: 48px; color: var(--text-dimmer); gap: 10px; font-size: 13px; }
+  .spinner { width: 18px; height: 18px; border: 2px solid var(--border); border-top-color: var(--grad-start); border-radius: 50%; animation: spin 0.7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+  .overlay.open { opacity: 1; pointer-events: all; }
+
+  .drawer { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 1px solid var(--border); border-radius: 20px 20px 0 0; z-index: 300; padding: 0 20px 40px; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.32,0.72,0,1); max-width: 600px; margin: 0 auto; max-height: 94vh; overflow-y: auto; }
+  .drawer.open { transform: translateY(0); }
+  .drawer-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 12px auto 20px; }
+  .drawer-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 22px; margin-bottom: 4px; }
+  .drawer-subtitle { font-size: 12px; color: var(--text-dimmer); margin-bottom: 20px; }
+
+  /* Section dividers in form */
+  .form-section { margin-top: 20px; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  .form-section-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-dimmer); }
+
+  .form-group { margin-bottom: 14px; }
+  .form-label { display: block; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 6px; }
+  .form-label .optional { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--text-dimmer); margin-left: 4px; font-size: 11px; }
+  .form-input, .form-textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px; padding: 10px 12px; outline: none; transition: border-color 0.2s; }
+  .form-input::placeholder, .form-textarea::placeholder { color: var(--text-dimmer); }
+  .form-input:focus, .form-textarea:focus { border-color: var(--grad-start); }
+  .form-textarea { resize: vertical; min-height: 72px; line-height: 1.5; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+  .form-actions .btn { flex: 1; justify-content: center; }
+
+  /* Minor toggle */
+  .minor-toggle { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 14px; cursor: pointer; }
+  .minor-toggle-label { font-size: 13px; color: var(--text-dim); }
+  .minor-toggle-label strong { display: block; color: var(--text); font-weight: 500; font-size: 14px; }
+  .toggle-switch { width: 40px; height: 22px; background: var(--border); border-radius: 11px; position: relative; transition: background 0.2s; flex-shrink: 0; }
+  .toggle-switch.on { background: var(--grad-start); }
+  .toggle-switch::after { content: ''; position: absolute; width: 16px; height: 16px; background: white; border-radius: 50%; top: 3px; left: 3px; transition: transform 0.2s; }
+  .toggle-switch.on::after { transform: translateX(18px); }
+
+  /* Guardian section */
+  .guardian-section { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 14px; display: none; }
+  .guardian-section.show { display: block; }
+  .guardian-section .form-group { margin-bottom: 10px; }
+  .guardian-section .form-group:last-child { margin-bottom: 0; }
+
+  /* Avatar upload */
+  .avatar-upload-area { display: flex; align-items: center; gap: 14px; padding: 14px; background: var(--surface2); border: 1px dashed var(--border); border-radius: var(--radius-sm); cursor: pointer; transition: border-color 0.2s; margin-bottom: 14px; }
+  .avatar-upload-area:hover { border-color: var(--grad-start); }
+  .avatar-preview { width: 52px; height: 52px; border-radius: 50%; background: linear-gradient(135deg, #1e1c2a, #1a1c2a); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; color: #a78bfa; overflow: hidden; flex-shrink: 0; }
+  .avatar-preview img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar-upload-text { flex: 1; }
+  .avatar-upload-text p { font-size: 13px; color: var(--text-dim); }
+  .avatar-upload-text span { font-size: 11px; color: var(--text-dimmer); margin-top: 2px; display: block; }
+  .upload-choose-btn { font-size: 12px; padding: 6px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; color: var(--text-dim); cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif; white-space: nowrap; flex-shrink: 0; }
+  .upload-choose-btn:hover { color: var(--text); border-color: var(--text-dimmer); }
+  .upload-progress { height: 2px; background: var(--border); border-radius: 1px; margin-top: 6px; overflow: hidden; display: none; }
+  .upload-progress.show { display: block; }
+  .upload-bar { height: 100%; background: var(--grad); width: 0%; transition: width 0.4s; border-radius: 1px; }
+
+  /* Status toggle */
+  .status-toggle { display: flex; gap: 8px; }
+  .status-opt { flex: 1; text-align: center; padding: 9px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; cursor: pointer; transition: all 0.15s; color: var(--text-dim); }
+  .status-opt.sel-active { border-color: var(--grad-start); color: var(--grad-start); background: rgba(79,209,197,0.07); }
+  .status-opt.sel-inactive { border-color: var(--danger); color: var(--danger); background: rgba(255,95,95,0.07); }
+
+  /* Confirm */
+  .confirm-box { position: fixed; inset: 0; display: none; align-items: center; justify-content: center; z-index: 400; padding: 24px; }
+  .confirm-box.open { display: flex; }
+  .confirm-inner { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; width: 100%; max-width: 320px; animation: fadeUp 0.2s ease; }
+  .confirm-inner h3 { font-weight: 500; font-size: 16px; margin-bottom: 8px; }
+  .confirm-inner p { font-size: 13px; color: var(--text-dim); margin-bottom: 20px; line-height: 1.5; }
+  .confirm-actions { display: flex; gap: 10px; }
+  .confirm-actions .btn { flex: 1; justify-content: center; }
+  .btn-confirm-danger { background: rgba(255,95,95,0.15); color: var(--danger); border: 1px solid rgba(255,95,95,0.3); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 9px 16px; border-radius: 8px; cursor: pointer; flex: 1; }
+
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 18px; font-size: 13px; color: var(--text); z-index: 500; opacity: 0; transition: all 0.3s; white-space: nowrap; }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  .toast.success { border-color: rgba(79,209,197,0.3); }
+  .toast.error { border-color: rgba(255,95,95,0.3); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-mark">
+    <span class="script">varddha</span>
+    <span class="sub">studios</span>
+  </div>
+  <button class="btn-icon">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M4.22 4.22l2.12 2.12m11.32 11.32 2.12 2.12M2 12h3m14 0h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+  </button>
+</header>
+
+<nav>
+  <div class="nav-item"><span>Dashboard</span></div>
+  <div class="nav-item"><span>Instructors</span></div>
+  <div class="nav-item active"><span>Students</span></div>
+  <div class="nav-item"><span>Classes</span></div>
+  <div class="nav-item"><span>Attendance</span></div>
+  <div class="nav-item"><span>Fees</span></div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <div>
+      <div class="page-title">Students</div>
+      <div class="count-badge" id="countBadge">—</div>
+    </div>
+    <button class="btn btn-primary" onclick="openDrawer()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+      Add
+    </button>
+  </div>
+
+  <div class="search-wrap">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input class="search-input" id="searchInput" type="text" placeholder="Search by name, phone, guardian…" oninput="filterList()">
+  </div>
+
+  <div class="filter-row">
+    <div class="filter-chip active" onclick="setFilter('all', this)">All</div>
+    <div class="filter-chip" onclick="setFilter('active', this)">Active</div>
+    <div class="filter-chip" onclick="setFilter('inactive', this)">Inactive</div>
+    <div class="filter-chip" onclick="setFilter('minor', this)">Minors</div>
+    <div class="filter-chip" onclick="setFilter('adult', this)">Adults</div>
+  </div>
+
+  <div id="listContainer">
+    <div class="loading"><div class="spinner"></div> Loading…</div>
+  </div>
+</main>
+
+<div class="overlay" id="overlay" onclick="handleOverlayClick()"></div>
+
+<!-- Drawer -->
+<div class="drawer" id="drawer">
+  <div class="drawer-handle"></div>
+  <div class="drawer-title" id="drawerTitle">New Student</div>
+  <div class="drawer-subtitle" id="drawerSubtitle">Fill in the student's details below</div>
+
+  <input type="hidden" id="editId">
+  <input type="hidden" id="existingAvatarUrl">
+
+  <!-- Avatar -->
+  <div class="avatar-upload-area" onclick="document.getElementById('avatarInput').click()">
+    <div class="avatar-preview" id="avatarPreview">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    </div>
+    <div class="avatar-upload-text">
+      <p>Profile picture</p>
+      <span>Optional · JPG or PNG · max 2MB</span>
+      <div class="upload-progress" id="uploadProgress"><div class="upload-bar" id="uploadBar"></div></div>
+    </div>
+    <button class="upload-choose-btn" type="button" onclick="event.stopPropagation(); document.getElementById('avatarInput').click()">Choose</button>
+  </div>
+  <input type="file" id="avatarInput" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="handleAvatarSelect(event)">
+
+  <!-- Basic info -->
+  <div class="form-group">
+    <label class="form-label">Full Name *</label>
+    <input class="form-input" id="fName" placeholder="e.g. Aanya Sharma">
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Date of Birth <span class="optional">optional</span></label>
+      <input class="form-input" id="fDob" type="date">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Joined On</label>
+      <input class="form-input" id="fJoinedOn" type="date">
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Phone <span class="optional">optional</span></label>
+      <input class="form-input" id="fPhone" type="tel" placeholder="9876543210">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email <span class="optional">optional</span></label>
+      <input class="form-input" id="fEmail" type="email" placeholder="aanya@email.com">
+    </div>
+  </div>
+
+  <!-- Minor toggle -->
+  <div class="minor-toggle" onclick="toggleMinor()" id="minorToggle">
+    <div class="minor-toggle-label">
+      <strong>Under 18 / Minor</strong>
+      Parent or guardian details required
+    </div>
+    <div class="toggle-switch" id="minorSwitch"></div>
+  </div>
+
+  <!-- Guardian section -->
+  <div class="guardian-section" id="guardianSection">
+    <div class="form-group">
+      <label class="form-label">Guardian Name *</label>
+      <input class="form-input" id="fParentName" placeholder="e.g. Sunita Sharma">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Guardian Phone *</label>
+      <input class="form-input" id="fParentPhone" type="tel" placeholder="9876543210">
+    </div>
+  </div>
+
+  <!-- Address & notes -->
+  <div class="form-section"><span class="form-section-label">Additional Details</span></div>
+
+  <div class="form-group">
+    <label class="form-label">Address <span class="optional">optional</span></label>
+    <input class="form-input" id="fAddress" placeholder="Area / locality">
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Notes <span class="optional">optional</span></label>
+    <textarea class="form-textarea" id="fNotes" placeholder="Any extra contact details, medical notes, preferences…"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Status</label>
+    <div class="status-toggle">
+      <div class="status-opt sel-active" id="statusActive" onclick="selectStatus(true)">Active</div>
+      <div class="status-opt" id="statusInactive" onclick="selectStatus(false)">Inactive</div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn-ghost" onclick="closeDrawer()">Cancel</button>
+    <button class="btn btn-primary" id="saveBtn" onclick="saveStudent()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+      Save
+    </button>
+  </div>
+</div>
+
+<!-- Confirm -->
+<div class="confirm-box" id="confirmBox">
+  <div class="confirm-inner">
+    <h3 id="confirmTitle"></h3>
+    <p id="confirmMsg"></p>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" onclick="closeConfirm()">Cancel</button>
+      <button class="btn-confirm-danger" id="confirmBtn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const SUPABASE_URL = 'https://dijbsmghnzfdxdktfjqy.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_9lDyq2_DKbY0mVeFH0zHzg_POmQ4GG1';
+  const H = {
+    'Content-Type': 'application/json',
+    'apikey': SUPABASE_KEY,
+    'Authorization': `Bearer ${SUPABASE_KEY}`,
+    'Prefer': 'return=representation'
+  };
+
+  let all = [], activeFilter = 'all', isMinor = false, isActive = true, pendingFile = null, confirmCb = null;
+
+  // ── Age helpers ──
+  function calcAge(dob) {
+    if (!dob) return null;
+    const diff = Date.now() - new Date(dob).getTime();
+    return Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+  }
+  function ageLabel(dob) {
+    const a = calcAge(dob);
+    if (a === null) return null;
+    return a < 18 ? `${a} yrs · Minor` : `${a} yrs`;
+  }
+
+  // ── Minor toggle ──
+  function toggleMinor() {
+    isMinor = !isMinor;
+    document.getElementById('minorSwitch').classList.toggle('on', isMinor);
+    document.getElementById('guardianSection').classList.toggle('show', isMinor);
+  }
+
+  function setMinor(val) {
+    isMinor = val;
+    document.getElementById('minorSwitch').classList.toggle('on', val);
+    document.getElementById('guardianSection').classList.toggle('show', val);
+  }
+
+  // Auto-detect minor from DOB
+  document.getElementById('fDob').addEventListener('change', function() {
+    const age = calcAge(this.value);
+    if (age !== null) setMinor(age < 18);
+  });
+
+  function selectStatus(active) {
+    isActive = active;
+    document.getElementById('statusActive').className = 'status-opt' + (active ? ' sel-active' : '');
+    document.getElementById('statusInactive').className = 'status-opt' + (!active ? ' sel-inactive' : '');
+  }
+
+  // ── Avatar ──
+  function handleAvatarSelect(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.size > 2 * 1024 * 1024) { showToast('Image must be under 2MB', 'error'); return; }
+    pendingFile = file;
+    const reader = new FileReader();
+    reader.onload = ev => setPreview(ev.target.result);
+    reader.readAsDataURL(file);
+  }
+
+  function setPreview(src) {
+    document.getElementById('avatarPreview').innerHTML = src
+      ? `<img src="${src}" alt="preview">`
+      : `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>`;
+  }
+
+  async function uploadAvatar(file, id) {
+    const ext = file.name.split('.').pop();
+    const path = `students/${id}.${ext}`;
+    const prog = document.getElementById('uploadProgress');
+    const bar = document.getElementById('uploadBar');
+    prog.classList.add('show'); bar.style.width = '40%';
+    const res = await fetch(`${SUPABASE_URL}/storage/v1/object/avatars/${path}`, {
+      method: 'POST',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': file.type, 'x-upsert': 'true' },
+      body: file
+    });
+    bar.style.width = '100%';
+    setTimeout(() => { prog.classList.remove('show'); bar.style.width = '0%'; }, 500);
+    if (!res.ok) throw new Error('Avatar upload failed');
+    return `${SUPABASE_URL}/storage/v1/object/public/avatars/${path}`;
+  }
+
+  // ── API ──
+  const api = {
+    list: () => fetch(`${SUPABASE_URL}/rest/v1/students?order=created_at.desc`, { headers: H }).then(r => r.ok ? r.json() : Promise.reject('Fetch failed')),
+    create: d => fetch(`${SUPABASE_URL}/rest/v1/students`, { method: 'POST', headers: H, body: JSON.stringify(d) }).then(r => r.ok ? r.json() : Promise.reject('Create failed')),
+    update: (id, d) => fetch(`${SUPABASE_URL}/rest/v1/students?id=eq.${id}`, { method: 'PATCH', headers: H, body: JSON.stringify(d) }).then(r => r.ok ? r.json() : Promise.reject('Update failed')),
+  };
+
+  // ── Render ──
+  const initials = n => n.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+
+  function applyFilters() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    return all.filter(s => {
+      const matchSearch = s.name.toLowerCase().includes(q)
+        || (s.phone||'').includes(q)
+        || (s.parent_name||'').toLowerCase().includes(q)
+        || (s.parent_phone||'').includes(q);
+      const age = calcAge(s.dob);
+      const matchFilter =
+        activeFilter === 'all' ? true :
+        activeFilter === 'active' ? s.is_active :
+        activeFilter === 'inactive' ? !s.is_active :
+        activeFilter === 'minor' ? (age !== null && age < 18) :
+        activeFilter === 'adult' ? (age === null || age >= 18) : true;
+      return matchSearch && matchFilter;
+    });
+  }
+
+  function setFilter(f, el) {
+    activeFilter = f;
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    renderList(applyFilters());
+  }
+
+  function filterList() { renderList(applyFilters()); }
+
+  function renderList(list) {
+    document.getElementById('countBadge').textContent = `${list.length} student${list.length !== 1 ? 's' : ''}`;
+    const c = document.getElementById('listContainer');
+    if (!list.length) {
+      c.innerHTML = `<div class="empty-state"><div class="empty-icon">🩰</div><h3>No students found</h3><p>${all.length === 0 ? 'Add your first student to get started.' : 'Try adjusting your search or filter.'}</p></div>`;
+      return;
+    }
+    c.innerHTML = `<div class="student-list">${list.map((s, i) => {
+      const age = ageLabel(s.dob);
+      const av = s.avatar_url ? `<img src="${s.avatar_url}?t=${Date.now()}" alt="">` : initials(s.name);
+      const hasContact = s.phone || s.email;
+      const hasGuardian = s.parent_name || s.parent_phone;
+      return `
+      <div class="student-card" style="animation-delay:${i*0.04}s">
+        <div class="card-top">
+          <div class="avatar">${av}</div>
+          <div class="card-info">
+            <div class="card-name">${s.name}</div>
+            <div class="card-sub">
+              ${age ? `<span class="age-badge">${age}</span>` : ''}
+              ${s.joined_on ? `<span style="color:var(--text-dimmer)">Since ${new Date(s.joined_on).toLocaleDateString('en-IN', {month:'short', year:'numeric'})}</span>` : ''}
+            </div>
+          </div>
+          <span class="status-pill ${s.is_active ? 'active' : 'inactive'}">${s.is_active ? 'Active' : 'Inactive'}</span>
+        </div>
+        ${hasContact ? `
+        <div class="card-meta">
+          ${s.phone ? `<div class="meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 5.55 5.55l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg><span>${s.phone}</span></div>` : ''}
+          ${s.email ? `<div class="meta-item"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><span>${s.email}</span></div>` : ''}
+        </div>` : ''}
+        ${hasGuardian ? `
+        <div class="guardian-row">
+          <div class="guardian-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div class="guardian-info">
+            <div class="guardian-name">${s.parent_name || '—'}</div>
+            ${s.parent_phone ? `<div class="guardian-phone">${s.parent_phone}</div>` : ''}
+          </div>
+        </div>` : ''}
+        <div class="card-actions">
+          <button class="btn btn-ghost btn-sm" onclick="openEdit('${s.id}')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Edit
+          </button>
+          <button class="btn-danger-soft" onclick="confirmToggle('${s.id}', ${s.is_active})">${s.is_active ? 'Deactivate' : 'Activate'}</button>
+        </div>
+      </div>`;
+    }).join('')}</div>`;
+  }
+
+  async function load() {
+    try { all = await api.list(); renderList(applyFilters()); }
+    catch(e) { document.getElementById('listContainer').innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><h3>Couldn't load</h3><p>${e}</p></div>`; }
+  }
+
+  // ── Drawer ──
+  function resetForm() {
+    document.getElementById('editId').value = '';
+    document.getElementById('existingAvatarUrl').value = '';
+    ['fName','fPhone','fEmail','fAddress','fNotes','fParentName','fParentPhone'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('fDob').value = '';
+    document.getElementById('fJoinedOn').value = new Date().toISOString().split('T')[0];
+    isMinor = false; isActive = true; pendingFile = null;
+    document.getElementById('avatarInput').value = '';
+    setPreview(null);
+    setMinor(false);
+    selectStatus(true);
+  }
+
+  function openDrawer(clear = true) {
+    if (clear) { document.getElementById('drawerTitle').textContent = 'New Student'; document.getElementById('drawerSubtitle').textContent = "Fill in the student's details below"; resetForm(); }
+    document.getElementById('drawer').classList.add('open');
+    document.getElementById('overlay').classList.add('open');
+  }
+
+  function closeDrawer() {
+    document.getElementById('drawer').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+
+  function openEdit(id) {
+    const s = all.find(x => x.id === id);
+    if (!s) return;
+    document.getElementById('drawerTitle').textContent = 'Edit Student';
+    document.getElementById('drawerSubtitle').textContent = s.name;
+    document.getElementById('editId').value = s.id;
+    document.getElementById('existingAvatarUrl').value = s.avatar_url || '';
+    document.getElementById('fName').value = s.name || '';
+    document.getElementById('fPhone').value = s.phone || '';
+    document.getElementById('fEmail').value = s.email || '';
+    document.getElementById('fDob').value = s.dob || '';
+    document.getElementById('fJoinedOn').value = s.joined_on || '';
+    document.getElementById('fAddress').value = s.address || '';
+    document.getElementById('fNotes').value = s.notes || '';
+    document.getElementById('fParentName').value = s.parent_name || '';
+    document.getElementById('fParentPhone').value = s.parent_phone || '';
+    const age = calcAge(s.dob);
+    setMinor(!!(s.parent_name || s.parent_phone || (age !== null && age < 18)));
+    pendingFile = null;
+    setPreview(s.avatar_url || null);
+    selectStatus(s.is_active);
+    openDrawer(false);
+  }
+
+  async function saveStudent() {
+    const name = document.getElementById('fName').value.trim();
+    if (!name) { showToast('⚠️ Name is required', 'error'); return; }
+    if (isMinor && !document.getElementById('fParentName').value.trim()) { showToast('⚠️ Guardian name required for minors', 'error'); return; }
+
+    const btn = document.getElementById('saveBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<div class="spinner" style="width:14px;height:14px;border-width:1.5px;margin:0"></div>';
+
+    try {
+      const editId = document.getElementById('editId').value;
+      let avatarUrl = document.getElementById('existingAvatarUrl').value || null;
+      const data = {
+        name,
+        phone: document.getElementById('fPhone').value.trim() || null,
+        email: document.getElementById('fEmail').value.trim() || null,
+        dob: document.getElementById('fDob').value || null,
+        joined_on: document.getElementById('fJoinedOn').value || null,
+        address: document.getElementById('fAddress').value.trim() || null,
+        notes: document.getElementById('fNotes').value.trim() || null,
+        parent_name: isMinor ? (document.getElementById('fParentName').value.trim() || null) : null,
+        parent_phone: isMinor ? (document.getElementById('fParentPhone').value.trim() || null) : null,
+        is_active: isActive
+      };
+
+      if (!editId) {
+        const created = await api.create(data);
+        const newId = created[0].id;
+        if (pendingFile) { avatarUrl = await uploadAvatar(pendingFile, newId); await api.update(newId, { avatar_url: avatarUrl }); }
+        showToast('✓ Student added', 'success');
+      } else {
+        if (pendingFile) avatarUrl = await uploadAvatar(pendingFile, editId);
+        await api.update(editId, { ...data, avatar_url: avatarUrl });
+        showToast('✓ Student updated', 'success');
+      }
+      closeDrawer(); await load();
+    } catch(e) {
+      showToast('Error: ' + e, 'error');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg> Save';
+    }
+  }
+
+  function confirmToggle(id, active) {
+    const s = all.find(x => x.id === id);
+    document.getElementById('confirmTitle').textContent = active ? 'Deactivate student?' : 'Activate student?';
+    document.getElementById('confirmMsg').textContent = active ? `${s.name} will be marked inactive.` : `${s.name} will be marked active again.`;
+    document.getElementById('confirmBtn').textContent = active ? 'Deactivate' : 'Activate';
+    confirmCb = async () => { await api.update(id, { is_active: !active }); showToast(active ? '✓ Deactivated' : '✓ Activated', 'success'); closeConfirm(); await load(); };
+    document.getElementById('overlay').classList.add('open');
+    document.getElementById('confirmBox').classList.add('open');
+  }
+
+  function closeConfirm() { document.getElementById('confirmBox').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); confirmCb = null; }
+  function handleOverlayClick() { if (document.getElementById('confirmBox').classList.contains('open')) return; closeDrawer(); }
+  document.getElementById('confirmBtn').onclick = () => confirmCb && confirmCb();
+
+  function showToast(msg, type = 'success') {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.className = `toast ${type} show`;
+    setTimeout(() => t.className = 'toast', 2800);
+  }
+
+  // Add notes column if it doesn't exist yet
+  load();
+</script>
+</body>
+</html>
