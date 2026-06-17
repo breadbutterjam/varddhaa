@@ -1,0 +1,47 @@
+    :root {
+      /* Palette DARK */
+      --col-bg:      #0A0A0A; /* deep black — primary page background */
+      --col-surface: #2A2A2A; /* charcoal — cards, sections, containers */
+      --col-deep:    #FFFFFF; /* primary text/headings on dark background */
+      --col-sage:    #C8102E; /* crimson red — primary CTA, links, buttons */
+      --col-amber:   #AA1126; /* ruby red — hover states, secondary accents */
+      --col-body:    #E5E5E5; /* light gray — body text */
+      --col-muted:   #656565; /* graphite — captions, borders, secondary text */
+      --col-rule:    rgba(28,43,30,0.12);
+
+      /* Typography */
+      --font-heading:  'Playfair Display', Georgia, serif;
+      --font-body:     'DM Sans', system-ui, sans-serif;
+
+      /* Spacing */
+      --section-pad:   5rem 0;
+      --container:     1160px;
+      --gutter:        clamp(1.5rem, 5vw, 4rem);
+
+      /* Motion */
+      --ease:          cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    :root {
+      /* Palette WARM */
+      --col-bg:      #FFF8E7; /* cream — primary page background */
+      --col-surface: #FFF1D6; /* warm off-white — cards, alternate sections */
+      --col-deep:    #4A2C1D; /* rich espresso brown — headings, navigation */
+      --col-sage:    #E68011; /* mustard yellow — primary brand accent, CTAs */
+      --col-amber:   #C16A46; /* terracotta — buttons, active states */
+      --col-body:    #6B4A3A; /* warm brown — body text */
+      --col-muted:   #9A7B68; /* muted warm taupe — captions, labels */
+      --col-rule:    rgba(28,43,30,0.12);
+
+      /* Typography */
+      --font-heading:  'Playfair Display', Georgia, serif;
+      --font-body:     'DM Sans', system-ui, sans-serif;
+
+      /* Spacing */
+      --section-pad:   5rem 0;
+      --container:     1160px;
+      --gutter:        clamp(1.5rem, 5vw, 4rem);
+
+      /* Motion */
+      --ease:          cubic-bezier(0.22, 1, 0.36, 1);
+    }
