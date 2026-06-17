@@ -828,3 +828,119 @@
     @media (max-width: 480px) {
       .gallery-grid { columns: 1; }
     }
+    /* ══════════════════════════════════════════
+       HOMEPAGE MASONRY GALLERY — append to dark.css / light.css
+       Grid HTML/JS is theme-agnostic; only these styles need
+       to ship per-theme. Uses existing tokens only.
+    ══════════════════════════════════════════ */
+
+    /* ── Edge-to-edge MASONRY gallery ──
+         Powered by masonry-layout (desandro). Columns are set in JS
+         via columnWidth: '.home-gallery-sizer'. Width % below controls
+         column count — edit both the CSS % and the JS columnWidth call
+         together if you change column count. ── */
+    .home-gallery-grid {
+      width: 100%;
+      position: relative;
+    }
+
+    .home-gallery-sizer,
+    .home-gallery-item {
+      width: 20%; /* 5 columns on desktop */
+    }
+
+    .home-gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--col-rule);
+      padding: 2px; /* creates the gutter via box-sizing below */
+      box-sizing: border-box;
+    }
+
+    .home-gallery-item-inner {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+
+    .home-gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.6s var(--ease);
+    }
+    .home-gallery-item:hover img { transform: scale(1.05); }
+
+    .home-gallery-item-inner::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0);
+      transition: background 0.3s;
+      pointer-events: none;
+    }
+    .home-gallery-item:hover .home-gallery-item-inner::after { background: rgba(0,0,0,0.3); }
+
+    /* Caption shown on hover */
+    .home-gallery-item-inner::before {
+      content: attr(data-caption);
+      position: absolute; left: 1rem; right: 1rem; bottom: 1rem;
+      font-family: var(--font-body);
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--col-bg);
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 1;
+      line-height: 1.4;
+      pointer-events: none;
+    }
+    .home-gallery-item:hover .home-gallery-item-inner::before { opacity: 1; transform: translateY(0); }
+
+    /* Fade-in once Masonry has positioned items (avoids flash of unstyled layout) */
+    .home-gallery-grid.is-laid-out .home-gallery-item {
+      opacity: 0;
+      animation: masonryFadeIn 0.6s var(--ease) forwards;
+    }
+    @keyframes masonryFadeIn { to { opacity: 1; } }
+
+    .gallery-placeholder {
+      width: 100%; min-height: 200px;
+      background: var(--col-surface);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gallery-placeholder span {
+      font-size: 0.6rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--col-muted);
+    }
+
+    /* Varied heights so the masonry stagger is visible
+       even before real photos are swapped in.
+       Remove these once real images (with natural varied
+       aspect ratios) are in place. */
+    .home-gallery-item:nth-child(2)  .gallery-placeholder { height: 260px; }
+    .home-gallery-item:nth-child(3)  .gallery-placeholder { height: 340px; }
+    .home-gallery-item:nth-child(4)  .gallery-placeholder { height: 200px; }
+    .home-gallery-item:nth-child(5)  .gallery-placeholder { height: 300px; }
+    .home-gallery-item:nth-child(6)  .gallery-placeholder { height: 230px; }
+    .home-gallery-item:nth-child(7)  .gallery-placeholder { height: 380px; }
+    .home-gallery-item:nth-child(8)  .gallery-placeholder { height: 210px; }
+    .home-gallery-item:nth-child(9)  .gallery-placeholder { height: 290px; }
+    .home-gallery-item:nth-child(10) .gallery-placeholder { height: 250px; }
+
+    .gallery-caption {
+      margin-top: 1.6rem;
+      font-size: 0.88rem; color: var(--col-muted);
+      max-width: 680px; line-height: 1.7;
+    }
+
+    /* ── Responsive column counts ── */
+    @media (max-width: 768px) {
+      .home-gallery-sizer,
+      .home-gallery-item { width: 33.333%; } /* 3 columns */
+    }
+
+    @media (max-width: 480px) {
+      .home-gallery-sizer,
+      .home-gallery-item { width: 50%; } /* 2 columns */
+    }

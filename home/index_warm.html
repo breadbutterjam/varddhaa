@@ -11,6 +11,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="light.css">
   
+  <!-- Masonry layout library — powers the gallery section -->
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 </head>
 <body>
 
@@ -37,6 +40,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="gallery_light.html">Gallery</a></li>
       <li><a href="#schedule">Schedule</a></li>
+      <!-- <li><a href="#videos">Videos</a></li> -->
       <li><a href="#instagram">Instagram</a></li>
       <li><a href="#contact">Contact Us</a></li>
     </ul>
@@ -99,29 +103,67 @@
           <p class="section-label">Gallery</p>
           <h2 class="section-title">Manch 2026</h2>
         </div>
-        <a href="#gallery" class="btn-outline">View All Images</a>
+        <a href="gallery_light.html" class="btn-outline">View All Images</a>
       </div>
+    </div>
 
-      <!-- ── Gallery grid
-           Replace gallery-1.jpg … gallery-6.jpg with your image filenames ── -->
-      <div class="gallery-grid reveal">
-        <div class="gallery-item">
-          <div class="gallery-placeholder"><img src="img/gallery-1.jpg" alt="Manch 2026" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder><span>gallery-1.jpg</span></div>'"/></div>
-        </div>
-        <div class="gallery-item">
-          <div class="gallery-placeholder"><img src="img/gallery-2.jpg" alt="Manch 2026" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder><span>gallery-2.jpg</span></div>'"/></div>
-        </div>
-        <div class="gallery-item">
-          <div class="gallery-placeholder"><img src="img/gallery-3.jpg" alt="Manch 2026" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder><span>gallery-3.jpg</span></div>'"/></div>
-        </div>
-        <div class="gallery-item">
-          <div class="gallery-placeholder"><img src="img/gallery-4.jpg" alt="Manch 2026" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder><span>gallery-4.jpg</span></div>'"/></div>
-        </div>
-        <div class="gallery-item">
-          <div class="gallery-placeholder"><img src="img/gallery-5.jpg" alt="Manch 2026" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder><span>gallery-5.jpg</span></div>'"/></div>
+    <!-- ── Masonry gallery — edge to edge (outside .container on purpose)
+         Powered by masonry-layout. Replace gallery-1.jpg … gallery-9.jpg
+         with your image filenames — natural image aspect ratios drive
+         the masonry effect, so portrait/landscape/square mixed in
+         creates the organic staggered look. Edit captions via
+         data-caption. Clicking an image opens the lightbox below. ── -->
+    <div class="home-gallery-grid" id="home-gallery-grid">
+      <div class="home-gallery-sizer"></div>
+
+      <div class="home-gallery-item" data-index="0" data-caption="Opening act — Manch 2026">
+        <div class="home-gallery-item-inner" data-caption="Opening act — Manch 2026">
+          <img src="img/gallery-1.jpg" alt="Manch 2026" onerror="this.parentElement.parentElement.innerHTML='<div class=home-gallery-item-inner><div class=gallery-placeholder><span>gallery-1.jpg</span></div></div>'"/>
         </div>
       </div>
+      <div class="home-gallery-item" data-index="1" data-caption="Ensemble performance">
+        <div class="home-gallery-item-inner" data-caption="Ensemble performance">
+          <img src="img/gallery-2.jpg" alt="Manch 2026" onerror="this.parentElement.parentElement.innerHTML='<div class=home-gallery-item-inner><div class=gallery-placeholder><span>gallery-2.jpg</span></div></div>'"/>
+        </div>
+      </div>
+      <div class="home-gallery-item" data-index="2" data-caption="Aerial silks showcase">
+        <div class="home-gallery-item-inner" data-caption="Aerial silks showcase">
+          <img src="img/gallery-3.jpg" alt="Manch 2026" onerror="this.parentElement.parentElement.innerHTML='<div class=home-gallery-item-inner><div class=gallery-placeholder><span>gallery-3.jpg</span></div></div>'"/>
+        </div>
+      </div>
+      <div class="home-gallery-item" data-index="3" data-caption="Contemporary group piece">
+        <div class="home-gallery-item-inner" data-caption="Contemporary group piece">
+          <img src="img/gallery-4.jpg" alt="Manch 2026" onerror="this.parentElement.parentElement.innerHTML='<div class=home-gallery-item-inner><div class=gallery-placeholder><span>gallery-4.jpg</span></div></div>'"/>
+        </div>
+      </div>
+      <div class="home-gallery-item" data-index="4" data-caption="Grand finale">
+        <div class="home-gallery-item-inner" data-caption="Grand finale">
+          <img src="img/gallery-5.jpg" alt="Manch 2026" onerror="this.parentElement.parentElement.innerHTML='<div class=home-gallery-item-inner><div class=gallery-placeholder><span>gallery-5.jpg</span></div></div>'"/>
+        </div>
+      </div>
+      <div class="home-gallery-item" data-index="5" data-caption="Backstage moment">
+        <div class="home-gallery-item-inner" data-caption="Backstage moment">
+          <img src="img/gallery-6.jpg" alt="Manch 2026" onerror="this.parentElement.parentElement.innerHTML='<div class=home-gallery-item-inner><div class=gallery-placeholder><span>gallery-6.jpg</span></div></div>'"/>
+        </div>
+      </div>
+      <div class="home-gallery-item" data-index="6" data-caption="Solo performance">
+        <div class="home-gallery-item-inner" data-caption="Solo performance">
+          <img src="img/gallery-7.jpg" alt="Manch 2026" onerror="this.parentElement.parentElement.innerHTML='<div class=home-gallery-item-inner><div class=gallery-placeholder><span>gallery-7.jpg</span></div></div>'"/>
+        </div>
+      </div>
+      <div class="home-gallery-item" data-index="7" data-caption="Standing ovation">
+        <div class="home-gallery-item-inner" data-caption="Standing ovation">
+          <img src="img/gallery-8.jpg" alt="Manch 2026" onerror="this.parentElement.parentElement.innerHTML='<div class=home-gallery-item-inner><div class=gallery-placeholder><span>gallery-8.jpg</span></div></div>'"/>
+        </div>
+      </div>
+      <div class="home-gallery-item" data-index="8" data-caption="Curtain call">
+        <div class="home-gallery-item-inner" data-caption="Curtain call">
+          <img src="img/gallery-9.jpg" alt="Manch 2026" onerror="this.parentElement.parentElement.innerHTML='<div class=home-gallery-item-inner><div class=gallery-placeholder><span>gallery-9.jpg</span></div></div>'"/>
+        </div>
+      </div>
+    </div>
 
+    <div class="container">
       <p class="gallery-caption reveal">Our annual showcase, celebrating growth and artistic expression. Bringing together performers of all ages, Manch highlights the talent, passion, and hard work of our students through captivating dance performances.</p>
     </div>
   </section>
@@ -234,6 +276,73 @@
   </section>
 
   <!-- ══════════════════════════════════════════
+       YOUTUBE
+  ══════════════════════════════════════════ -->
+  <section class="youtube" id="videos" style="display:none">
+    <div class="container">
+      <div class="section-header reveal">
+        <div>
+          <p class="section-label">Watch</p>
+          <h2 class="section-title">Latest Videos</h2>
+        </div>
+        <a href="https://www.youtube.com/@varddhastudios" target="_blank" rel="noopener" class="btn-outline">
+          View Channel
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width:14px;height:14px"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+
+      <!-- ── YouTube grid
+           Uses channel uploads playlist — no API key needed.
+           The playlist ID is always UC[channelID with UC→UU].
+           Channel: @varddhastudios  →  UCcEEwfMwCc_0C51BlH1o0kg
+           Uploads playlist:           UUcEEwfMwCc_0C51BlH1o0kg  ── -->
+      <div class="yt-grid reveal">
+
+        <!-- Featured / latest video — larger -->
+        <div class="yt-featured">
+          <div class="yt-embed-wrap">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/videoseries?list=UUcEEwfMwCc_0C51BlH1o0kg&index=1&rel=0&modestbranding=1&color=white"
+              title="Varddhaa Studios — Latest Video"
+              frameborder="0"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+          <p class="yt-label">Latest Upload</p>
+        </div>
+
+        <!-- Playlist / channel embed — scrollable -->
+        <div class="yt-playlist">
+          <div class="yt-embed-wrap">
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/videoseries?list=UUcEEwfMwCc_0C51BlH1o0kg&rel=0&modestbranding=1&color=white"
+              title="Varddhaa Studios — All Videos"
+              frameborder="0"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy">
+            </iframe>
+          </div>
+          <p class="yt-label">All Videos</p>
+        </div>
+
+      </div>
+
+      <a href="https://www.youtube.com/@varddhastudios" target="_blank" rel="noopener" class="yt-handle reveal">
+        <!-- YouTube icon -->
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px">
+          <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+        </svg>
+        @varddhastudios
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
        CONTACT
   ══════════════════════════════════════════ -->
   <section class="contact" id="contact">
@@ -285,6 +394,35 @@
   <!-- ══════════════════════════════════════════
        FOOTER
   ══════════════════════════════════════════ -->
+  <!-- ══════════════════════════════════════════
+       MODAL LIGHTBOX — for homepage gallery preview
+  ══════════════════════════════════════════ -->
+  <div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-label="Image viewer">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modal-close" aria-label="Close">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+
+      <div class="modal-img-wrap">
+        <img id="modal-img" src="" alt=""/>
+      </div>
+
+      <div class="modal-caption-bar">
+        <p class="modal-caption-text" id="modal-caption"></p>
+        <span class="modal-counter" id="modal-counter"></span>
+      </div>
+
+      <button class="modal-nav modal-nav--prev" id="modal-prev" aria-label="Previous image">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="modal-nav modal-nav--next" id="modal-next" aria-label="Next image">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <span class="modal-hint">← → arrow keys to navigate &nbsp;·&nbsp; esc to close</span>
+    </div>
+  </div>
+
   <footer class="footer">
     <div class="container">
       <div class="footer-inner">
@@ -406,6 +544,101 @@
     }, { threshold: 0.12 });
 
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ═══════════════════════════════════════════
+    // MASONRY GALLERY INIT
+    // Waits for images to load so true heights are known,
+    // then lays out the grid and fades items in.
+    // ═══════════════════════════════════════════
+    const galleryGrid = document.querySelector('.home-gallery-grid');
+
+    if (galleryGrid) {
+      const masonryInstance = new Masonry(galleryGrid, {
+        itemSelector: '.home-gallery-item',
+        columnWidth: '.home-gallery-sizer',
+        percentPosition: true,
+        gutter: 0
+      });
+
+      imagesLoaded(galleryGrid).on('progress', () => {
+        masonryInstance.layout();
+      });
+
+      imagesLoaded(galleryGrid).on('always', () => {
+        galleryGrid.classList.add('is-laid-out');
+        masonryInstance.layout();
+      });
+    }
+
+    // ═══════════════════════════════════════════
+    // HOMEPAGE GALLERY — MODAL LIGHTBOX
+    // Reads data-caption from each .home-gallery-item.
+    // Next/Prev cycles through the items currently in the grid.
+    // ═══════════════════════════════════════════
+    const homeItems = Array.from(document.querySelectorAll('.home-gallery-item'));
+    let homeModalIndex = 0;
+
+    const hBackdrop  = document.getElementById('modal-backdrop');
+    const hModalImg  = document.getElementById('modal-img');
+    const hModalCap  = document.getElementById('modal-caption');
+    const hModalCount = document.getElementById('modal-counter');
+
+    function openHomeModal(i) {
+      homeModalIndex = i;
+      renderHomeModal();
+      hBackdrop.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function renderHomeModal() {
+      const item = homeItems[homeModalIndex];
+      const img  = item.querySelector('img');
+      hModalImg.style.opacity = '0';
+      hModalImg.src = img.src;
+      hModalImg.alt = img.alt;
+      hModalImg.onload = () => { hModalImg.style.opacity = '1'; };
+      hModalCap.textContent = item.dataset.caption || '';
+      hModalCount.textContent = `${homeModalIndex + 1} / ${homeItems.length}`;
+    }
+
+    function closeHomeModal() {
+      hBackdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function prevHomeModal() {
+      homeModalIndex = (homeModalIndex - 1 + homeItems.length) % homeItems.length;
+      renderHomeModal();
+    }
+
+    function nextHomeModal() {
+      homeModalIndex = (homeModalIndex + 1) % homeItems.length;
+      renderHomeModal();
+    }
+
+    homeItems.forEach((item, i) => {
+      item.addEventListener('click', () => openHomeModal(i));
+    });
+
+    document.getElementById('modal-close').addEventListener('click', closeHomeModal);
+    document.getElementById('modal-prev').addEventListener('click', prevHomeModal);
+    document.getElementById('modal-next').addEventListener('click', nextHomeModal);
+
+    hBackdrop.addEventListener('click', e => { if (e.target === hBackdrop) closeHomeModal(); });
+
+    document.addEventListener('keydown', e => {
+      if (!hBackdrop.classList.contains('open')) return;
+      if (e.key === 'Escape')     closeHomeModal();
+      if (e.key === 'ArrowLeft')  prevHomeModal();
+      if (e.key === 'ArrowRight') nextHomeModal();
+    });
+
+    let homeTouchStartX = 0;
+    hBackdrop.addEventListener('touchstart', e => { homeTouchStartX = e.touches[0].clientX; }, { passive: true });
+    hBackdrop.addEventListener('touchend', e => {
+      const diff = homeTouchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) diff > 0 ? nextHomeModal() : prevHomeModal();
+    });
   </script>
 </body>
 </html>
