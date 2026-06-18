@@ -25,6 +25,9 @@
       --ease:          cubic-bezier(0.22, 1, 0.36, 1);
     }
 
+    /* ── Heading accent — wraps 1-2 words in red for emphasis ── */
+    .accent { color: var(--col-sage); }
+
     /* ── Reset ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
